@@ -1,15 +1,30 @@
 import { useState } from "react";
 import "./styles.css";
 
-const getScale = (newSize: number, oldSize: number): number =>
-  ((newSize - oldSize) / oldSize) * 100;
+const getScale = ({
+  newSize,
+  oldSize,
+}: {
+  newSize: number;
+  oldSize: number;
+}): number => {
+  const quotient = Math.floor(newSize / oldSize);
+  const remainder = newSize % oldSize;
+
+  return (
+    quotient * 100 + (100 - Math.abs(((remainder - oldSize) / oldSize) * 100))
+  );
+};
 
 export default function App() {
   const [newSize, setNewSize] = useState("0");
   const [oldSize, setOldSize] = useState("0");
 
-  const scale =
-    100 - Math.abs(getScale(parseFloat(newSize), parseFloat(oldSize)));
+  const scale = getScale({
+    newSize: parseFloat(newSize),
+    oldSize: parseFloat(oldSize),
+  });
+
   return (
     <div className="App">
       <h1>Calculate scaling percentage for 3d prints</h1>
