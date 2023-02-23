@@ -1,4 +1,11 @@
 .App {
   font-family: sans-serif;
   text-align: center;
+
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  border: 1px dashed #ddd;
+  padding: 1rem;
+  max-width: 320px;
 }
